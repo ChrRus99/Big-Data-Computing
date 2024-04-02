@@ -1,0 +1,36 @@
+buildscript {
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+// set compatibility with old JVM versions
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+sourceSets {
+    main { java { srcDirs = ['src'] } }
+    test { java { srcDirs = ['test'] } }
+}
+
+dependencies {
+    implementation 'org.apache.spark:spark-core_2.11:2.2.0'
+    implementation 'org.apache.spark:spark-mllib_2.11:2.2.0'
+    implementation 'org.apache.hadoop:hadoop-client:2.7.2'
+}
+
+shadowJar {
+    zip64 true
+}
